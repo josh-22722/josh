@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thank You Birthday Wish</title>
+  <style>
+    body {
+      margin: 0;
+      background: #fff0f6;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff4d88;
+      margin-top: 50px;
+      font-size: 2.5em;
+      z-index: 10;
+      position: relative;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff4d88;
+      transform: rotate(45deg);
+      animation: floatHeart 8s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff4d88;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-20vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    /* Confetti */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* Carousel */
+    
+    /* Carousel Styling */
+    .carousel-container {
+      width: 100%;
+      max-width: 360px;
+      margin: 30px auto;
+      overflow: hidden;
+      position: relative;
+      border-radius: 10px;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 1s ease-in-out;
+      width: calc(100px * 5); /* 5 images */
+    }
+
+    .carousel-image {
+      flex: 0 0 100px;
+      height: 100px;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+
+    .carousel-image img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid #ff99cc;
+    }
+  
+  </style>
+</head>
+<body>
+  <div style="position: absolute; top: 20%; left: 50%; transform: translateX(-50%); text-align: center; z-index: 2;">
+    <h1 style="font-size: 40px; color: #d6336c;">🎉 Thank You from the Bottom of My Heart 🎉</h1>
+    <p style="max-width: 600px; margin: 20px auto; font-size: 1.2em; color: dimgrey;">
+  I’m truly touched by all the sweet messages, calls, and wishes on my birthday. 
+  Your kind words made my day extra special and filled my heart with happiness. 
+  Whether it was a simple text or a thoughtful gesture, it meant the world to me. 💫<br><br>
+  Thank you for being part of my life and making my birthday so memorable. 💕
+</p>
+
+  </div>
+
+  <!-- Floating Hearts -->
+  <script>
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (6 + Math.random() * 4) + "s";
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <!-- Confetti -->
+  <canvas id="confetti-canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const confetti = [];
+    const confettiCount = 150;
+
+    function Confetto() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height - canvas.height;
+      this.size = Math.random() * 6 + 3;
+      this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+      this.speedY = Math.random() * 3 + 1;
+      this.speedX = Math.random() * 2 - 1;
+    }
+
+    for (let i = 0; i < confettiCount; i++) {
+      confetti.push(new Confetto());
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confetti.forEach(c => {
+        ctx.fillStyle = c.color;
+        ctx.fillRect(c.x, c.y, c.size, c.size);
+        c.y += c.speedY;
+        c.x += c.speedX;
+
+        if (c.y > canvas.height) {
+          c.y = -c.size;
+          c.x = Math.random() * canvas.width;
+        }
+      });
+      requestAnimationFrame(drawConfetti);
+    }
+
+    drawConfetti();
+  </script>
+
+   <!-- Carousel 1 -->
+  <div class="carousel-container">
+    <div class="carousel-track" id="carousel1">
+      <div class="carousel-image"><img src="1.jpeg" /></div>
+      <div class="carousel-image"><img src="2.jpeg" /></div>
+      <div class="carousel-image"><img src="3.jpeg" /></div>
+      <div class="carousel-image"><img src="4.jpeg" /></div>
+      <div class="carousel-image"><img src="5.jpeg" /></div>
+    </div>
+  </div>
+
+  <!-- Carousel 2
+  <div class="carousel-container">
+    <div class="carousel-track" id="carousel2">
+      <div class="carousel-image"><img src="3.jpeg" /></div>
+      <div class="carousel-image"><img src="5.jpeg" /></div>
+      <div class="carousel-image"><img src="1.jpeg" /></div>
+      <div class="carousel-image"><img src="2.jpeg" /></div>
+      <div class="carousel-image"><img src="4.jpeg" /></div>
+    </div>
+  </div> -->
+
+  <script>
+    function setupCarousel(trackId, visibleCount, totalCount) {
+      let index = 0;
+      const track = document.getElementById(trackId);
+      const imageWidth = 100; // px
+      const autoScroll = () => {
+        index++;
+        if (index > totalCount - visibleCount) index = 0;
+        track.style.transform = `translateX(-${index * imageWidth}px)`;
+      };
+      setInterval(autoScroll, 2500);
+    }
+
+    // Setup both carousels (5 total images, show 3 at a time)
+    setupCarousel("carousel1", 3, 5);
+    setupCarousel("carousel2", 3, 5);
+  </script>
+
+</body>
+</html>
