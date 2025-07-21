@@ -6,25 +6,22 @@
   <title>Thank You Birthday Wish</title>
   <style>
     body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
       background: #fff0f6;
       font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      text-align: center;
     }
 
     h1 {
-      font-size: 2.5em;
       color: #ff4d88;
       margin-top: 50px;
+      font-size: 2.5em;
       z-index: 10;
       position: relative;
     }
 
-    /* Floating hearts */
+    /* Floating Hearts */
     .heart {
       position: absolute;
       width: 20px;
@@ -78,9 +75,7 @@
     }
 
     /* Carousel */
-      <!-- Carousel -->
-  <style>
-    /* Carousel Styles */
+    /* Carousel Styling */
     .carousel-container {
       width: 90%;
       max-width: 360px;
@@ -93,35 +88,41 @@
     .carousel-track {
       display: flex;
       transition: transform 1s ease-in-out;
-      width: calc(100% * 5); /* 5 images */
+      width: calc(100px * 5); /* 5 images */
     }
 
     .carousel-image {
-      flex: 0 0 33.33%;
-      height: auto;
+      flex: 0 0 100px;
+      height: 100px;
       padding: 5px;
       box-sizing: border-box;
     }
 
     .carousel-image img {
       width: 100%;
-      height: auto;
+      height: 100%;
       object-fit: cover;
       border-radius: 10px;
       border: 2px solid #ff99cc;
     }
 
-    /* Mobile Adjustments */
+    /* Mobile Responsiveness */
     @media (max-width: 600px) {
       .carousel-image {
-        flex: 0 0 60%;
+        flex: 0 0 60%; /* Show 3 images at a time on small screens */
+      }
+      h1 {
+        font-size: 2em;
+      }
+      p {
+        font-size: 1em;
       }
     }
   </style>
 </head>
 <body>
 
-  <div>
+  <div style="position: absolute; top: 20%; left: 50%; transform: translateX(-50%); text-align: center; z-index: 2;">
     <h1 style="font-size: 40px; color: #d6336c;">🎉 Thank You from the Bottom of My Heart 🎉</h1>
     <p style="max-width: 600px; margin: 20px auto; font-size: 1.2em; color: dimgrey;">
       I’m truly touched by all the sweet messages, calls, and wishes on my birthday.
@@ -185,23 +186,14 @@
     drawConfetti();
   </script>
 
-<div class="carousel-container">
+  <!-- Carousel 1 -->
+  <div class="carousel-container">
     <div class="carousel-track" id="carousel1">
-      <div class="carousel-image">
-        <img src="https://i.imgur.com/4pD42R2.jpg" />
-      </div>
-      <div class="carousel-image">
-        <img src="https://i.imgur.com/3D7RpJ6.jpg" />
-      </div>
-      <div class="carousel-image">
-        <img src="https://i.imgur.com/Zu6qKyr.jpg" />
-      </div>
-      <div class="carousel-image">
-        <img src="https://i.imgur.com/D4XROjD.jpg" />
-      </div>
-      <div class="carousel-image">
-        <img src="https://i.imgur.com/eODTL6T.jpg" />
-      </div>
+      <div class="carousel-image"><img src="https://i.imgur.com/4pD42R2.jpg" /></div>
+      <div class="carousel-image"><img src="https://i.imgur.com/3D7RpJ6.jpg" /></div>
+      <div class="carousel-image"><img src="https://i.imgur.com/Zu6qKyr.jpg" /></div>
+      <div class="carousel-image"><img src="https://i.imgur.com/D4XROjD.jpg" /></div>
+      <div class="carousel-image"><img src="https://i.imgur.com/eODTL6T.jpg" /></div>
     </div>
   </div>
 
