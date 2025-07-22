@@ -74,8 +74,11 @@
       z-index: 100;
     }
 
-    /* Carousel */
     /* Carousel Styling */
+    .carousel-web-only {
+      display: block;
+    }
+
     .carousel-container {
       width: 90%;
       max-width: 360px;
@@ -88,16 +91,16 @@
     .carousel-track {
       display: flex;
       transition: transform 1s ease-in-out;
-      width: calc(100px * 5); /* 5 images */
+      width: calc(100px * 5);
     }
 
     .carousel-image {
-  flex: 0 0 auto;
-  width: 25vw; /* 25% of viewport width */
-  height: auto;
-  padding: 5px;
-  box-sizing: border-box;
-  }
+      flex: 0 0 auto;
+      width: 100px;
+      height: auto;
+      padding: 5px;
+      box-sizing: border-box;
+    }
 
     .carousel-image img {
       width: 100%;
@@ -105,6 +108,13 @@
       object-fit: cover;
       border-radius: 10px;
       border: 2px solid #ff99cc;
+    }
+
+    /* Hide carousel on mobile */
+    @media (max-width: 768px) {
+      .carousel-web-only {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -174,33 +184,38 @@
     drawConfetti();
   </script>
 
-  <!-- Carousel 1 -->
-  <div class="carousel-container">
-    <div class="carousel-track" id="carousel1">
-      <div class="carousel-image"><img src="1.jpeg" /></div>
-      <div class="carousel-image"><img src="2.jpeg" /></div>
-      <div class="carousel-image"><img src="3.jpeg" /></div>
-      <div class="carousel-image"><img src="4.jpeg" /></div>
-      <div class="carousel-image"><img src="5.jpeg" /></div>
+  <!-- Carousel (Web Only) -->
+  <div class="carousel-web-only">
+    <div class="carousel-container">
+      <div class="carousel-track" id="carousel1">
+        <div class="carousel-image"><img src="1.jpeg" /></div>
+        <div class="carousel-image"><img src="2.jpeg" /></div>
+        <div class="carousel-image"><img src="3.jpeg" /></div>
+        <div class="carousel-image"><img src="4.jpeg" /></div>
+        <div class="carousel-image"><img src="5.jpeg" /></div>
+      </div>
     </div>
   </div>
 
+  <!-- Carousel JS (Only runs if screen is > 768px) -->
   <script>
-    function setupCarousel(trackId, visibleCount, totalCount) {
-      let index = 0;
-      const track = document.getElementById(trackId);
-      const imageWidth = 100;
+    if (window.innerWidth > 768) {
+      function setupCarousel(trackId, visibleCount, totalCount) {
+        let index = 0;
+        const track = document.getElementById(trackId);
+        const imageWidth = 100;
 
-      const autoScroll = () => {
-        index++;
-        if (index > totalCount - visibleCount) index = 0;
-        track.style.transform = `translateX(-${index * imageWidth}px)`;
-      };
+        const autoScroll = () => {
+          index++;
+          if (index > totalCount - visibleCount) index = 0;
+          track.style.transform = `translateX(-${index * imageWidth}px)`;
+        };
 
-      setInterval(autoScroll, 2500);
+        setInterval(autoScroll, 2500);
+      }
+
+      setupCarousel("carousel1", 3, 5);
     }
-
-    setupCarousel("carousel1", 3, 5);
   </script>
 
 </body>
