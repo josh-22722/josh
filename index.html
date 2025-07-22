@@ -92,11 +92,12 @@
     }
 
     .carousel-image {
-      flex: 0 0 100px;
-      height: 110px;
-      padding: 5px;
-      box-sizing: border-box;
-    }
+  flex: 0 0 auto;
+  width: 25vw; /* 25% of viewport width */
+  height: auto;
+  padding: 5px;
+  box-sizing: border-box;
+  }
 
     .carousel-image img {
       width: 100%;
@@ -117,6 +118,20 @@
       p {
         font-size: 1em;
       }
+      @media (max-width: 768px) {
+  .carousel-image {
+    width: 40vw; /* adjust width for smaller screens */
+    height: auto; /* maintain aspect ratio */
+    padding: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-image {
+    width: 60vw;
+    padding: 3px;
+  }
+}
     }
   </style>
 </head>
